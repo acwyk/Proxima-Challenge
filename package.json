@@ -18,6 +18,6 @@
   "homepage": "https://github.com/acwyk/Proxima-Challenge#readme",
   "dependencies": {
     "config": "^3.3.3",
-    "websocket": "^1.0.33"
+    "ws": "^7.4.1"
   }
 }

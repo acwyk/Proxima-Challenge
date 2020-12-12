@@ -2,8 +2,8 @@
 	"environment": "default",
 	"binance": {
 		"ws": {
-			 "wss://stream.binance.com:9443/ws",
-			 "update_speed_ms": 1000
+			 "uri": "wss://stream.binance.com:9443/ws",
+			 "update_speed_ms": 1000,
 			 "streams": {
 			 	 "bnbbtc_depth": "bnbbtc@"
 			 },
@@ -13,7 +13,7 @@
 			 	 "ten": 10,
 			 	 "twenty": 20
 			 }
-		}
+		},
 		"api": {
 			"uri": "https://api.binance.com/api/v3/"
 		}
