@@ -1,0 +1,23 @@
+{
+  "name": "proxima_challenge",
+  "version": "1.0.0",
+  "description": "Prozima programming challenge based on the Binance Crypto currenty marketplace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acwyk/Proxima-Challenge.git"
+  },
+  "author": "Adam cwyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acwyk/Proxima-Challenge/issues"
+  },
+  "homepage": "https://github.com/acwyk/Proxima-Challenge#readme",
+  "dependencies": {
+    "config": "^3.3.3",
+    "websocket": "^1.0.33"
+  }
+}
