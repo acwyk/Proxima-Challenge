@@ -2,10 +2,13 @@
 	"environment": "default",
 	"binance": {
 		"ws": {
-			 "uri": "wss://stream.binance.com:9443/ws",
+			 "uri": "wss://stream.binance.com",
+			 "port": 9443,
+			 "uri_ext": "ws",
 			 "update_speed_ms": 1000,
 			 "streams": {
-			 	 "bnbbtc_depth": "bnbbtc@"
+			 	 "bnbbtc": "bnbbtc"
+
 			 },
 			 "depth_levels": {
 			 	 "zero": "",
@@ -15,7 +18,11 @@
 			 }
 		},
 		"api": {
-			"uri": "https://api.binance.com/api/v3/"
+			"uri": "https://api.binance.com/api/v3/depth",
+			"symbols": {
+				"bnbbtc": "BNBBTC"
+			},
+			"limit": 1000
 		}
 	}
 }
