@@ -27,19 +27,8 @@ else {
 		ws.on('message', (_data) => {
 			console.log("message");
 			let data = JSON.parse(_data);
-			if (stream_item === undefined){
-				// denotes initial item in stream as per 
-				// https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
-				if (data.U <= (snapshot.lastUpdateId +1) && data.u >= (snapshot.lastUpdateId + 1)){
-					stream_item = data;	
-				}
-			}
-			if (data.U > snapshot.lastUpdateId){
-				stream_item = data;
-			}
-			console.log(stream_item);
-			avg_asks = stream_item.a;
-			avg_bids = stream_item.b;
+			process_ws_data(data);
+			
 		})
 
 		ws.on('close', () =>{
@@ -59,7 +48,21 @@ else {
 		console.log(err);
 		process.exit(1);
 	});
-	
 }
 
+
+function process_ws_data(data){
+	if (stream_item === undefined){
+		// denotes initial item in stream as per 
+		// https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
+		if (data.U <= (snapshot.lastUpdateId +1) && data.u >= (snapshot.lastUpdateId + 1)){
+			stream_item = data;	
+		}
+	}
+	if (data.U > snapshot.lastUpdateId){
+		stream_item = data;
+	}
+	avg_asks = stream_item.a;
+	avg_bids = stream_item.b;
+}
 
