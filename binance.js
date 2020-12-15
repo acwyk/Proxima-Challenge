@@ -26,10 +26,11 @@ function call_binance_api(config){
 			method: 'GET'
 		}).then(response  => {
 			console.log("SUCCESS API");
-			resolve(response);
+			resolve(response.data);
 		}).catch((err) => {
 			console.log("ERROR API");
-			reject(err);
+			console.log(err);
+			reject({});
 		})
 	});
 }
