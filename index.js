@@ -55,14 +55,33 @@ function process_ws_data(data){
 	if (stream_item === undefined){
 		// denotes initial item in stream as per 
 		// https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
-		if (data.U <= (snapshot.lastUpdateId +1) && data.u >= (snapshot.lastUpdateId + 1)){
+		if (data.U <= (snapshot.lastUpdateId + 1) && data.u >= (snapshot.lastUpdateId + 1)){
 			stream_item = data;	
 		}
 	}
-	if (data.U > snapshot.lastUpdateId){
+	else if (data.U > snapshot.lastUpdateId){
 		stream_item = data;
 	}
-	avg_asks = stream_item.a;
-	avg_bids = stream_item.b;
+	if (stream_item !== undefined){
+		avg_asks = stream_item.a;
+		avg_bids = stream_item.b;
+		calculate_avg_price(avg_asks);
+	}
+	console.log("data:");
+	// console.log(data);
+	console.log(`${data.u} | ${data.U} | ${snapshot.lastUpdateId + 1}`);
 }
+
+function calculate_avg_price(price_array, btc_qty){
+	let price_array_avg_price
+	let sum_avg_price = 0;
+	for (let index = 0; index < price_array.length; index++) {
+		const element = price_array[index];
+		// sum_avg_price += (index[1] / )
+	}
+	// return (btc_qty / sum_avg_price)
+}
+
+// size/ (quantity A/execution price A + order size B/execution price B +….)
+// 1 / ()
 
