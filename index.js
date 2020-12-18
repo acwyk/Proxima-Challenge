@@ -20,17 +20,16 @@ else {
 	let ws = binance.init_ws_streams(config.binance.ws);
 	binance.call_binance_api(config.binance.api).then(result => {
 		snapshot = result;
-		//#endregion
 	}).catch(err => {
-		console.log("Error in API Call.");
 		console.log(err);
 		process.exit(1);
 	});
 
 	ws.on('message', (_data) => {
 		let data = JSON.parse(_data);
-		process_ws_data(data, qty_btc);
-		
+		let bid_ask_price = process_ws_data(data, qty_btc);
+		console.clear();
+		console.log(`BTC Offered: ${qty_btc} Bid Price: ${bid_ask_price[0]} | Ask Price: ${bid_ask_price[1]}`);
 	})
 
 	ws.on('close', () =>{
@@ -48,6 +47,7 @@ else {
 
 
 function process_ws_data(data, qty_btc){
+	let bid_ask_price = [0, 0]; // default 0 value of array
 	if (stream_item === undefined){
 		// denotes initial item in stream as per 
 		// https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#how-to-manage-a-local-order-book-correctly
@@ -64,9 +64,9 @@ function process_ws_data(data, qty_btc){
 	if (stream_item !== undefined){
 		avg_asks = calculate_avg_price(stream_item.a, qty_btc);
 		avg_bids = calculate_avg_price(stream_item.b, qty_btc);
-		console.log("avg asks", avg_asks);
-		console.log("avg bids", avg_bids);
+		bid_ask_price = [avg_asks, avg_bids];
 	}
+	return bid_ask_price;
 }
 
 function calculate_avg_price(price_array, qty_btc){
@@ -81,5 +81,3 @@ function calculate_avg_price(price_array, qty_btc){
 
 	return qty_btc / sum_avg_price;
 }
-
-
