@@ -19,6 +19,6 @@
   "homepage": "https://github.com/acwyk/Proxima-Challenge#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "ws": "^7.4.2"
+    "ws": "^7.4.6"
   }
 }
